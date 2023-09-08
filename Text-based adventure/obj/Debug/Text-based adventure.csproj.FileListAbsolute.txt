@@ -1,0 +1,7 @@
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\bin\Debug\Text-based adventure.exe.config
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\bin\Debug\Text-based adventure.exe
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\bin\Debug\Text-based adventure.pdb
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\obj\Debug\Text-based adventure.csproj.AssemblyReference.cache
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\obj\Debug\Text-based adventure.csproj.CoreCompileInputs.cache
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\obj\Debug\Text-based adventure.exe
+C:\Users\brent\source\repos\Text-based adventure\Text-based adventure\obj\Debug\Text-based adventure.pdb
