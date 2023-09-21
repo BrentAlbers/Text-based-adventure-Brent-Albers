@@ -9,25 +9,15 @@ namespace Text_based_adventure
 {
     class Program
     {
-        static void PrintTextLetterByLetter(string text, int delayMilliseconds)
-        {
-            foreach (char c in text)
-            {
-                Console.Write(c);
-                Thread.Sleep(delayMilliseconds);
-            }
 
-            Console.WriteLine();
-        }
-        static void PressEnterToContinue()
-        {
-            Console.WriteLine("\nPress enter to continue");
-            Console.ReadLine();
-            Console.Clear();
-        }
+
         static void Main(string[] args)
         {
-            PrintTextLetterByLetter("Guide: Hello  i will be your guide in this adventure.\nGuide: I don't have name yet so first i want you to think of a name for me.\n", 20);
+            GameLogic gameLogic = new GameLogic();
+            UI ui = new UI();
+
+
+            ui.PrintTextLetterByLetter("Guide: Hello  i will be your guide in this adventure.\nGuide: I don't have name yet so first i want you to think of a name for me.\n", 20);
             Console.Write("Enter name for guide here: ");
 
             int attempts = 0;
