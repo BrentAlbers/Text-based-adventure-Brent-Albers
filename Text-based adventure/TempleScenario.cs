@@ -11,6 +11,7 @@ namespace Text_based_adventure
         public void HandleTempleScenario(string guide, string playerName, bool playedScenario)
         {
             UI ui = new UI();
+            EndScreen endScreen = new EndScreen();
             int attempts = 0;
             ForestScenario templeScenario = new ForestScenario();
 
@@ -96,7 +97,7 @@ namespace Text_based_adventure
             {
                 ui.PrintTextLetterByLetter("\nGuardian: You've lost the dice duel. The path to the Holy Grail remains hidden forever.\n", 20);
                 ui.PressEnterToContinue();
-                ui.GameOver();
+                endscreen
                 return false; 
             }
             else
