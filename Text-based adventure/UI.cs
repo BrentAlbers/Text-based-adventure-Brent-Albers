@@ -22,9 +22,18 @@ namespace Text_based_adventure
         public void PressEnterToContinue()
         {
             Console.WriteLine("\nPress enter to continue, or 'H' for instructions");
+            CheckForHelpInput();
             Console.ReadLine();
             Console.Clear();
 
+        }
+        public void CheckForHelpInput()
+        {
+            string playerInput = Console.ReadLine();
+            if (playerInput == "H")
+            {
+                Console.Write("These are the instructions");
+            }
         }
 
     }

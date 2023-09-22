@@ -13,6 +13,7 @@ namespace Text_based_adventure
         public void HandleForestScenario(string guide, string playerName, bool playedScenario)
         {
             UI ui = new UI();
+            EndScreen endScreen = new EndScreen();
             int attempts = 0;
             TempleScenario templeScenario = new TempleScenario();
 
@@ -39,6 +40,7 @@ namespace Text_based_adventure
                 {
                     ui.PrintTextLetterByLetter("\nGuardian: Correct! You may proceed.\n", 20);
                     ui.PressEnterToContinue();
+                    HandleFinalForestChallenge(guide, playerName);
                 }
                 else
                 {
@@ -56,7 +58,7 @@ namespace Text_based_adventure
                             ui.PrintTextLetterByLetter($"Guardian: The guardian becomes hostile and blocks your path.\n", 20);
                             ui.PrintTextLetterByLetter($"{guide}: I'm afraid finding another route will be pointless now, we will never be at the holy grail before it is stolen", 20);
                             ui.PressEnterToContinue();
-                            ui.GameOver();
+                            endScreen.GameOver();
                         }
                     }
                     else
@@ -69,10 +71,11 @@ namespace Text_based_adventure
             }
 
         }
-        public bool HandleForestChallenge(string guide, string playerName)
+        public bool HandleFinalForestChallenge(string guide, string playerName)
         {
             UI ui = new UI();
             Random random = new Random();
+            EndScreen endScreen = new EndScreen();
             int playerRoll = random.Next(1, 7);
             int enemyRoll = random.Next(1, 7);
 
@@ -89,21 +92,21 @@ namespace Text_based_adventure
                 ui.PressEnterToContinue();
                 ui.PrintTextLetterByLetter($"{guide}: It seems we've taken the wrong path, {playerName}." + $"\n{guide}: The Holy Grail was never here. Our mission is in jeopardy.\n", 20);
                 ui.PressEnterToContinue();
-                ui.GameOver();
+                endScreen.GameOver();
                 return true; 
             }
             else if (playerRoll < enemyRoll)
             {
                 ui.PrintTextLetterByLetter("\nForest Guardian: You've lost the dice duel. The forest remains an enigma.\n", 20);
                 ui.PressEnterToContinue();
-                ui.GameOver();
+                endScreen.GameOver();
                 return false;
             }
             else
             {
                 ui.PrintTextLetterByLetter("\nForest Guardian: It's a tie! A rare occurrence. We'll try again.\n", 20);
                 ui.PressEnterToContinue();
-                return HandleForestChallenge(guide, playerName);
+                return HandleFinalForestChallenge(guide, playerName);
             }
         }
     }

@@ -35,7 +35,7 @@ namespace Text_based_adventure
                 {
                     ui.PrintTextLetterByLetter("\nGuardian: Correct! You may proceed.\n", 20);
                     ui.PressEnterToContinue();
-                    HandleFinalChallenge(guide, playerName);
+                    HandleFinalTempleChallenge(guide, playerName);
                     
                 }
                 else
@@ -53,7 +53,7 @@ namespace Text_based_adventure
                             ui.PrintTextLetterByLetter($"Guardian: The guardian becomes hostile and blocks your path.\n", 20);
                             ui.PrintTextLetterByLetter($"{guide}: I'm afraid finding another route will be pointless now, we will never be at the holy grail before it is stolen", 20);
                             ui.PressEnterToContinue();
-                            ui.GameOver();
+                            endScreen.GameOver();
 
                         }
                         ui.PrintTextLetterByLetter("\nGuardian: Still not quite there.\nGuardian: Here's another hint: It's known for its dark feathers and silent flight.\n", 20);
@@ -69,10 +69,11 @@ namespace Text_based_adventure
             }
 
         }
-        public bool HandleFinalChallenge(string guide, string playerName)
+        public bool HandleFinalTempleChallenge(string guide, string playerName)
         {
             UI ui = new UI();
             Random random = new Random();
+            EndScreen endScreen = new EndScreen();
             int playerRoll = random.Next(1, 7);
             int enemyRoll = random.Next(1, 1);
 
@@ -90,21 +91,21 @@ namespace Text_based_adventure
                 Console.Clear();
                 ui.PrintTextLetterByLetter($"{guide}: Congratulations, {playerName}!" + $"\n{guide}: We've found the Holy Grail, the legendary artifact of immense power." + $"\n{guide}: With this, we can fulfill our mission and prevent it from falling into the wrong hands.\n", 20);
                 ui.PressEnterToContinue();
-                ui.VictoryScreen();
+                endScreen.VictoryScreen();
                 return true; 
             }
             else if (playerRoll < enemyRoll)
             {
                 ui.PrintTextLetterByLetter("\nGuardian: You've lost the dice duel. The path to the Holy Grail remains hidden forever.\n", 20);
                 ui.PressEnterToContinue();
-                endscreen
+                endScreen.GameOver();
                 return false; 
             }
             else
             {
                 ui.PrintTextLetterByLetter("\nGuardian: It's a tie! A rare occurrence. We'll try again.\n", 20);
                 ui.PressEnterToContinue();
-                return HandleFinalChallenge(guide, playerName); 
+                return HandleFinalTempleChallenge(guide, playerName); 
             }
         }
     }
