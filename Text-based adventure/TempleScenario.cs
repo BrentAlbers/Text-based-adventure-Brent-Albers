@@ -17,7 +17,7 @@ namespace Text_based_adventure
 
             if (playedScenario == true)
             {
-                ui.PrintTextLetterByLetter($"{guide}: Maybe we will have more luck with this route, {playerName}." + $"\n{guide}: The forest is dense and filled with secrets. " + $"\n{guide}: But beware, a mystical guardian awaits.\n", 20);
+                ui.PrintTextLetterByLetter($"{guide}: Maybe we will have more luck with this route, {playerName}." + $"\n{guide}: The path to the ancient temple is mysterious and shrouded in secrets.. " + $"\n{guide}: But beware, a mystical guardian awaits.\n", 20);
             }
             else
             {
@@ -28,7 +28,8 @@ namespace Text_based_adventure
 
             while (attempts < 3)
             {
-                Console.Write("Your answer: ");
+                Console.Write("Your answer, or 'H' for instructions: ");
+                ui.CheckForHelpInput();
                 string playerAnswer = Console.ReadLine().ToLower();
 
                 if (playerAnswer == "raven")
@@ -36,7 +37,6 @@ namespace Text_based_adventure
                     ui.PrintTextLetterByLetter("\nGuardian: Correct! You may proceed.\n", 20);
                     ui.PressEnterToContinue();
                     HandleFinalTempleChallenge(guide, playerName);
-                    
                 }
                 else
                 {
@@ -45,6 +45,8 @@ namespace Text_based_adventure
                     if (attempts == 1)
                     {
                         ui.PrintTextLetterByLetter("\nGuardian: I'm sorry, that's not the correct answer.\nGuardian: Here's a hint: The answer is a bird of the night with bright eyes.\n", 20);
+                        Console.Write("Your answer, or 'H' for instructions: ");
+                        ui.CheckForHelpInput();
                     }
                     else if (attempts == 2)
                     {
@@ -57,12 +59,14 @@ namespace Text_based_adventure
 
                         }
                         ui.PrintTextLetterByLetter("\nGuardian: Still not quite there.\nGuardian: Here's another hint: It's known for its dark feathers and silent flight.\n", 20);
+                        Console.Write("Your answer, or 'H' for instructions: ");
+                        ui.CheckForHelpInput();
                     }
                     else
                     {
                         ui.PrintTextLetterByLetter($"Guardian: The guardian becomes hostile and blocks your path.\n\nYou must find an alternative route.", 20);
+                        ui.PrintTextLetterByLetter($"{guide}: I guess we will have to try the forest route then", 20);
                         ui.PressEnterToContinue();
-                        ui.PrintTextLetterByLetter($"{guide}: I guess we will have to try the temple route then", 20);
                         templeScenario.HandleForestScenario(guide, playerName, true);
                     }
                 }

@@ -49,6 +49,8 @@ namespace Text_based_adventure
                     if (attempts == 1)
                     {
                         ui.PrintTextLetterByLetter("\nGuardian: I'm sorry, that's not the correct answer.\nGuardian: Here's a hint: It's related to sound.\n", 20);
+                        Console.Write("Your answer, or 'H' for instructions: ");
+                        ui.CheckForHelpInput();
                     }
                     else if (attempts == 2)
                     {
@@ -60,6 +62,8 @@ namespace Text_based_adventure
                             ui.PressEnterToContinue();
                             endScreen.GameOver();
                         }
+                        Console.Write("Your answer, or 'H' for instructions: ");
+                        ui.CheckForHelpInput();
                     }
                     else
                     {

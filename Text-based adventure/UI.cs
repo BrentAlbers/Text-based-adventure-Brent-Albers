@@ -25,16 +25,30 @@ namespace Text_based_adventure
             CheckForHelpInput();
             Console.ReadLine();
             Console.Clear();
-
+            string objective = "Objective: Find the Holy Grail before it's stolen";
+            Console.WriteLine("Objective: Find the Holy Grail before it's stolen");
         }
         public void CheckForHelpInput()
         {
-            string playerInput = Console.ReadLine();
-            if (playerInput == "H")
+            ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+            if (keyInfo.Key == ConsoleKey.H)
             {
-                Console.Write("These are the instructions");
+                Console.Clear();
+                Console.WriteLine("Instructions:");
+                Console.WriteLine("Type an answer when asked.");
+                Console.WriteLine("The game will give clear directions on how to answer.");
+                Console.WriteLine("If you are stuck, you can always enter 'H' for instructions.");
+                Console.WriteLine("The game will let you know when it has ended and how you ended it.");
+                Console.WriteLine("Press Enter to continue...");
+                while (Console.ReadKey(true).Key != ConsoleKey.Enter) { }
+                Console.Clear();
+            }
+            else
+            {
+                
             }
         }
+    }
 
     }
-}
+

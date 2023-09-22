@@ -14,27 +14,24 @@ namespace Text_based_adventure
         public static void Main(string[] args)
         {
             UI ui = new UI();
+            EndScreen endScreen = new EndScreen();
             ForestScenario forestScenario = new ForestScenario();
             TempleScenario templeScenario = new TempleScenario();
 
             Console.WindowWidth = 80;
             Console.WindowHeight = 25;
 
-
             Console.WriteLine("Welcome to My Game!");
+            Console.WriteLine("Press Enter to Start... Or press H for instructions");
+            ui.CheckForHelpInput();
 
-            Console.WriteLine("Press Enter to Start...");
 
-
-
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter)
-            {
-                
-            }
             Console.Clear();
 
             ui.PrintTextLetterByLetter("Guide: Hello  i will be your guide in this adventure.\nGuide: I don't have name yet so first i want you to think of a name for me.\n", 20);
-            Console.Write("Enter name for guide here: ");
+            Console.Write("Enter name for guide here , or 'H' for instructions: ");
+            ui.CheckForHelpInput();
+
             string guide = Console.ReadLine();
             Console.Clear();
 
@@ -42,7 +39,8 @@ namespace Text_based_adventure
             string spaces = new string(' ', guideSpaces);
 
             ui.PrintTextLetterByLetter($"\n{guide}: What a great name! from now on i will be {guide}.\n{guide}: Now i just need to know your name before we start with this adventure.\n", 20);
-            Console.Write("Enter your name here: ");
+            Console.Write("Enter your name here , or 'H' for instructions: ");
+            ui.CheckForHelpInput();
 
             string playerName = Console.ReadLine();
             Console.Clear();
@@ -53,19 +51,28 @@ namespace Text_based_adventure
             ui.PressEnterToContinue();
 
             ui.PrintTextLetterByLetter($"{guide}: You've reached a fork in the road. One path leads through a dark and mysterious forest, \n{spaces}  while the other leads to an ancient temple." +$"\n{guide}: Which path will you choose?  \n", 20);
-            Console.Write("\nEnter your choice here (Type 'forest' or 'temple'): ");
+            Console.Write("\nEnter your choice here (Type 'forest' or 'temple'), or 'H' for instructions: ");
+            ui.CheckForHelpInput();
 
-            string chosenPath = Console.ReadLine();
+            string chosenPath = Console.ReadLine()?.ToLower();
             Console.Clear();
 
             if (chosenPath == "forest")
             {
                 forestScenario.HandleForestScenario(guide, playerName, false);
+                ui.PressEnterToContinue();
             }
             else if (chosenPath == "temple")
             {
                 templeScenario.HandleTempleScenario(guide, playerName, false);
-            } 
+                ui.PressEnterToContinue();
+            }
+            else
+            {
+                ui.PrintTextLetterByLetter($"{guide}: I'm afraid finding that's not a choice", 20);
+                ui.PressEnterToContinue();
+                endScreen.GameOver();
+            }
         }
     }
 
